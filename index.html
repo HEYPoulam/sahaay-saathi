@@ -820,6 +820,112 @@ function init() {
 }
 init();
 </script>
+<!-- Sahaay Emergency Assistance -->
 
+<div id="sos-card" style="
+  margin: 25px auto;
+  max-width: 900px;
+  padding: 20px;
+  border-radius: 14px;
+  background: #fff5f5;
+  border: 1px solid #f0caca;
+">
+
+  <h2 style="margin-top:0;">
+    🚨 Emergency Assistance
+  </h2>
+
+  <p>
+    Need immediate assistance? Use the SOS button
+    to send an emergency assistance request.
+  </p>
+
+  <button
+    onclick="openSahaaySOS()"
+    style="
+      background:#b42318;
+      color:white;
+      border:none;
+      padding:14px 25px;
+      border-radius:9px;
+      font-size:17px;
+      font-weight:bold;
+      cursor:pointer;
+    "
+  >
+    🚨 Request SOS Assistance
+  </button>
+
+</div>
+
+<script>
+
+async function openSahaaySOS() {
+
+  const confirmed = confirm(
+    "Are you sure you want to request emergency assistance?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const pin = prompt(
+    "Enter your SOS authorization PIN:"
+  );
+
+  if (!pin) {
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      "/api/sos",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          pin: pin
+        })
+      }
+    );
+
+
+    const result = await response.json();
+
+
+    if (result.sosTriggered) {
+
+      alert(
+        "Emergency assistance request recorded."
+      );
+
+    } else {
+
+      alert(result.message);
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "SOS error:",
+      error
+    );
+
+    alert(
+      "Unable to connect to the SOS service."
+    );
+
+  }
+
+}
+
+</script>
 </body>
 </html>
