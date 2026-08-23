@@ -1,835 +1,1440 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sahaay Saathi — Community Healthcare Companion</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap');
 
-  :root {
-    --teal-deep: #1F5C56;
-    --teal-mid: #2E7C73;
-    --sage: #8CB39A;
-    --sand: #F3ECDD;
-    --sand-dark: #E7DCC4;
-    --clay: #C97B4A;
-    --ink: #1B2A27;
-    --ink-soft: #4A5D58;
-    --white: #FFFFFF;
-    --danger: #B4483A;
-    --ok: #3E8562;
-    --radius: 14px;
-    --shadow: 0 2px 10px rgba(27,42,39,0.08);
+:root{
+  --teal-deep:#1F5C56;
+  --teal-mid:#2E7C73;
+  --sage:#8CB39A;
+  --sand:#F3ECDD;
+  --sand-dark:#E7DCC4;
+  --clay:#C97B4A;
+  --ink:#1B2A27;
+  --ink-soft:#4A5D58;
+  --white:#FFFFFF;
+  --danger:#B4483A;
+  --ok:#3E8562;
+  --radius:14px;
+  --shadow:0 2px 10px rgba(27,42,39,.08);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Nunito',sans-serif;
+  background:var(--sand);
+  color:var(--ink);
+  min-height:100vh;
+}
+
+h1,h2,h3,.brand{
+  font-family:'Fraunces',serif;
+}
+
+/* HEADER */
+
+header{
+  background:var(--teal-deep);
+  color:white;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.brand-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand-mark{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  background:var(--clay);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  font-size:18px;
+}
+
+.brand{
+  font-size:20px;
+  font-weight:700;
+}
+
+.tagline{
+  font-size:12px;
+  opacity:.85;
+}
+
+.top-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+select,.status-pill{
+  font-family:'Nunito',sans-serif;
+  font-size:13px;
+}
+
+header select{
+  padding:7px 10px;
+  border-radius:8px;
+  border:none;
+  background:rgba(255,255,255,.15);
+  color:white;
+}
+
+header select option{
+  color:var(--ink);
+}
+
+.status-pill{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(255,255,255,.15);
+  padding:6px 12px;
+  border-radius:20px;
+  font-weight:700;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#6FE39A;
+}
+
+.dot.off{
+  background:#E3A26F;
+}
+
+/* DISCLAIMER */
+
+.disclaimer{
+  background:#FBF3E4;
+  border-bottom:1px solid var(--sand-dark);
+  color:var(--ink-soft);
+  font-size:13px;
+  padding:8px 20px;
+  text-align:center;
+}
+
+.disclaimer strong{
+  color:var(--clay);
+}
+
+/* MAIN */
+
+main{
+  max-width:1000px;
+  margin:0 auto;
+  padding:20px 16px 60px;
+}
+
+/* PROFILE */
+
+.profile-card{
+  background:white;
+  border-radius:var(--radius);
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:22px;
+  border-left:5px solid var(--teal-mid);
+}
+
+.avatar{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:var(--sage);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:20px;
+  flex-shrink:0;
+}
+
+.profile-info h2{
+  margin:0 0 2px;
+  font-size:19px;
+}
+
+.profile-info p{
+  margin:0;
+  font-size:13px;
+  color:var(--ink-soft);
+}
+
+.edit-profile-btn{
+  margin-left:auto;
+  background:none;
+  border:1px solid var(--sand-dark);
+  color:var(--teal-deep);
+  padding:7px 14px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+}
+
+/* TABS */
+
+.tabs{
+  display:flex;
+  gap:6px;
+  margin-bottom:18px;
+  overflow-x:auto;
+  padding-bottom:2px;
+}
+
+.tab-btn{
+  background:white;
+  border:1px solid var(--sand-dark);
+  color:var(--ink-soft);
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.tab-btn.active{
+  background:var(--teal-deep);
+  color:white;
+  border-color:var(--teal-deep);
+}
+
+.module-badge{
+  display:inline-block;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  background:var(--clay);
+  color:white;
+  padding:2px 6px;
+  border-radius:5px;
+  margin-left:6px;
+  vertical-align:middle;
+}
+
+/* PANELS */
+
+.panel{
+  display:none;
+}
+
+.panel.active{
+  display:block;
+}
+
+.panel-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.panel-header h2{
+  margin:0;
+  font-size:22px;
+}
+
+.panel-header h3{
+  margin:0 0 3px;
+}
+
+.sub{
+  font-size:13px;
+  color:var(--ink-soft);
+  margin-top:2px;
+}
+
+/* CARDS */
+
+.card{
+  background:white;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+  margin-bottom:14px;
+}
+
+/* FORMS */
+
+.form-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.form-row input,
+.form-row select{
+  flex:1;
+  min-width:140px;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid var(--sand-dark);
+  font-family:'Nunito',sans-serif;
+  font-size:14px;
+  background:var(--sand);
+  color:var(--ink);
+}
+
+.form-row input:focus,
+.form-row select:focus{
+  outline:2px solid var(--teal-mid);
+}
+
+/* BUTTONS */
+
+.btn{
+  background:var(--teal-deep);
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+  font-family:'Nunito',sans-serif;
+}
+
+.btn:hover{
+  background:var(--teal-mid);
+}
+
+.btn.secondary{
+  background:none;
+  color:var(--danger);
+  border:1px solid var(--danger);
+  padding:6px 12px;
+  font-size:12px;
+}
+
+.btn.ok{
+  background:var(--ok);
+}
+
+.voice-btn{
+  background:var(--clay);
+  min-width:105px;
+}
+
+.voice-btn:hover{
+  background:#b9683d;
+}
+
+.voice-btn.listening{
+  background:var(--danger);
+}
+
+/* LISTS */
+
+.list-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--sand-dark);
+}
+
+.list-item:last-child{
+  border-bottom:none;
+}
+
+.list-icon{
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  background:var(--sand);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  font-size:16px;
+}
+
+.list-body{
+  flex:1;
+  min-width:0;
+}
+
+.list-title{
+  font-weight:700;
+  font-size:14.5px;
+}
+
+.list-sub{
+  font-size:12.5px;
+  color:var(--ink-soft);
+}
+
+.queue-tag{
+  background:var(--sage);
+  color:white;
+  font-size:11px;
+  font-weight:800;
+  padding:3px 9px;
+  border-radius:20px;
+  flex-shrink:0;
+}
+
+.taken-tag{
+  background:var(--ok);
+}
+
+.due-tag{
+  background:var(--clay);
+}
+
+/* EMPTY */
+
+.empty-state{
+  text-align:center;
+  padding:30px 10px;
+  color:var(--ink-soft);
+  font-size:14px;
+}
+
+.empty-state .big{
+  font-size:34px;
+  margin-bottom:8px;
+}
+
+/* HEALTHVAULT */
+
+.vault-summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.vault-stat{
+  background:var(--sand);
+  border-radius:12px;
+  padding:14px;
+}
+
+.vault-stat span{
+  display:block;
+  font-size:11px;
+  color:var(--ink-soft);
+  margin-bottom:4px;
+}
+
+.vault-stat strong{
+  font-size:18px;
+}
+
+/* DASHBOARD */
+
+.dash-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.5px;
+}
+
+.dash-table th{
+  text-align:left;
+  padding:8px 10px;
+  background:var(--sand);
+  color:var(--ink-soft);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+}
+
+.dash-table td{
+  padding:10px;
+  border-bottom:1px solid var(--sand-dark);
+}
+
+.risk-dot{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  margin-right:6px;
+}
+
+/* SOS */
+
+.sos-card{
+  margin:25px auto;
+  max-width:900px;
+  padding:20px;
+  border-radius:14px;
+  background:#fff5f5;
+  border:1px solid #f0caca;
+}
+
+.sos-button{
+  background:#b42318;
+  color:white;
+  border:none;
+  padding:14px 25px;
+  border-radius:9px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  font-size:12px;
+  color:var(--ink-soft);
+  padding:20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+  .vault-summary{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:560px){
+  .profile-card{
+    flex-wrap:wrap;
   }
 
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    font-family: 'Nunito', sans-serif;
-    background: var(--sand);
-    color: var(--ink);
-    min-height: 100vh;
+  .edit-profile-btn{
+    margin-left:0;
   }
 
-  h1, h2, h3, .brand { font-family: 'Fraunces', serif; }
-
-  /* ---------- Top bar ---------- */
-  header {
-    background: var(--teal-deep);
-    color: var(--white);
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
+  .list-item{
+    flex-wrap:wrap;
   }
-  .brand-wrap { display: flex; align-items: center; gap: 10px; }
-  .brand-mark {
-    width: 38px; height: 38px; border-radius: 10px;
-    background: var(--clay);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px;
-    flex-shrink: 0;
-  }
-  .brand { font-size: 20px; font-weight: 700; letter-spacing: 0.2px; }
-  .tagline { font-size: 12px; opacity: 0.85; margin-top: -2px; }
-
-  .top-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  select, .status-pill {
-    font-family: 'Nunito', sans-serif;
-    font-size: 13px;
-  }
-  select {
-    padding: 7px 10px;
-    border-radius: 8px;
-    border: none;
-    background: rgba(255,255,255,0.15);
-    color: var(--white);
-  }
-  select option { color: var(--ink); }
-
-  .status-pill {
-    display: flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.15);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: 700;
-  }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: #6FE39A; }
-  .dot.off { background: #E3A26F; }
-
-  /* ---------- Disclaimer ---------- */
-  .disclaimer {
-    background: #FBF3E4;
-    border-bottom: 1px solid var(--sand-dark);
-    color: var(--ink-soft);
-    font-size: 13px;
-    padding: 8px 20px;
-    text-align: center;
-  }
-  .disclaimer strong { color: var(--clay); }
-
-  /* ---------- Layout ---------- */
-  main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-  }
-
-  .profile-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 22px;
-    border-left: 5px solid var(--teal-mid);
-  }
-  .avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: var(--sage);
-    color: var(--white);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 20px; flex-shrink: 0;
-  }
-  .profile-info h2 { margin: 0 0 2px; font-size: 19px; }
-  .profile-info p { margin: 0; font-size: 13px; color: var(--ink-soft); }
-  .edit-profile-btn {
-    margin-left: auto;
-    background: none;
-    border: 1px solid var(--sand-dark);
-    color: var(--teal-deep);
-    padding: 7px 14px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-  }
-  .edit-profile-btn:hover { background: var(--sand); }
-
-  /* ---------- Tabs ---------- */
-  .tabs {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 18px;
-    overflow-x: auto;
-    padding-bottom: 2px;
-  }
-  .tab-btn {
-    background: var(--white);
-    border: 1px solid var(--sand-dark);
-    color: var(--ink-soft);
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: all 0.15s;
-  }
-  .tab-btn.active {
-    background: var(--teal-deep);
-    color: var(--white);
-    border-color: var(--teal-deep);
-  }
-  .module-badge {
-    display: inline-block;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-    background: var(--clay);
-    color: var(--white);
-    padding: 2px 6px;
-    border-radius: 5px;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
-
-  .panel {
-    display: none;
-    animation: fade 0.2s ease;
-  }
-  .panel.active { display: block; }
-  @keyframes fade { from { opacity: 0; transform: translateY(4px);} to {opacity:1; transform: translateY(0);} }
-
-  .panel-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .panel-header h2 { margin: 0; font-size: 22px; }
-  .panel-header .sub { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
-
-  .card {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 18px;
-    margin-bottom: 14px;
-  }
-
-  .form-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
-  .form-row input, .form-row select {
-    flex: 1;
-    min-width: 140px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--sand-dark);
-    font-family: 'Nunito', sans-serif;
-    font-size: 14px;
-    background: var(--sand);
-    color: var(--ink);
-  }
-  .form-row input:focus, .form-row select:focus { outline: 2px solid var(--teal-mid); }
-
-  .btn {
-    background: var(--teal-deep);
-    color: var(--white);
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-  }
-  .btn:hover { background: var(--teal-mid); }
-  .btn.secondary {
-    background: none;
-    color: var(--danger);
-    border: 1px solid var(--danger);
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  .btn.ok {
-    background: var(--ok);
-  }
-
-  .list-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--sand-dark);
-  }
-  .list-item:last-child { border-bottom: none; }
-  .list-icon {
-    width: 36px; height: 36px; border-radius: 9px;
-    background: var(--sand);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 16px;
-  }
-  .list-body { flex: 1; min-width: 0; }
-  .list-title { font-weight: 700; font-size: 14.5px; }
-  .list-sub { font-size: 12.5px; color: var(--ink-soft); }
-  .queue-tag {
-    background: var(--sage);
-    color: var(--white);
-    font-size: 11px;
-    font-weight: 800;
-    padding: 3px 9px;
-    border-radius: 20px;
-    flex-shrink: 0;
-  }
-  .taken-tag { background: var(--ok); }
-  .due-tag { background: var(--clay); }
-
-  .empty-state {
-    text-align: center;
-    padding: 30px 10px;
-    color: var(--ink-soft);
-    font-size: 14px;
-  }
-  .empty-state .big { font-size: 34px; margin-bottom: 8px; }
-
-  .dash-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  .dash-table th {
-    text-align: left;
-    padding: 8px 10px;
-    background: var(--sand);
-    color: var(--ink-soft);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-  .dash-table td { padding: 10px; border-bottom: 1px solid var(--sand-dark); }
-  .risk-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
-
-  footer {
-    text-align: center;
-    font-size: 12px;
-    color: var(--ink-soft);
-    padding: 20px;
-  }
-
-  @media (max-width: 560px) {
-    .profile-card { flex-wrap: wrap; }
-    .edit-profile-btn { margin-left: 0; }
-  }
-
-  .record-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .mini-stat { background:var(--sand); border-radius:12px; padding:12px; }
-  .mini-stat span { display:block; font-size:11px; color:var(--ink-soft); }
-  .mini-stat strong { font-size:14px; }
-  @media (max-width:700px){ .record-grid{grid-template-columns:1fr;} }
-
+}
 </style>
+
 </head>
+
 <body>
 
 <header>
+
   <div class="brand-wrap">
     <div class="brand-mark">+</div>
-    <div>
-      <div class="brand" id="appTitle">Sahaay Saathi</div>
-      <div class="tagline" id="appTagline">Community Healthcare Companion</div>
-    </div>
+
+```
+<div>
+  <div class="brand" id="appTitle">
+    Sahaay Saathi
   </div>
+
+  <div class="tagline" id="appTagline">
+    Community Healthcare Companion
+  </div>
+</div>
+```
+
+  </div>
+
   <div class="top-controls">
-    <div class="status-pill"><span class="dot" id="netDot"></span><span id="netLabel">Online</span></div>
-    <select id="langSelect" onchange="setLanguage(this.value)">
-      <option value="en">English</option>
-      <option value="hi">हिंदी (Hindi)</option>
-    </select>
+
+```
+<div class="status-pill">
+  <span class="dot" id="netDot"></span>
+  <span id="netLabel">Online</span>
+</div>
+
+<select id="langSelect" onchange="setLanguage(this.value)">
+  <option value="en">English</option>
+  <option value="hi">हिंदी (Hindi)</option>
+</select>
+```
+
   </div>
+
 </header>
 
 <div class="disclaimer" id="disclaimerText">
-  <strong>Note:</strong> Sahaay Saathi helps you manage appointments, medicines and records — it does not diagnose conditions or replace advice from a qualified doctor.
+  <strong>Note:</strong>
+  Sahaay Saathi helps you manage appointments, medicines and records —
+  it does not diagnose conditions or replace advice from a qualified doctor.
 </div>
 
 <main>
-  <div class="profile-card">
-    <div class="avatar" id="avatarInitial">?</div>
-    <div class="profile-info">
-      <h2 id="profileName">Set up your profile</h2>
-      <p id="profileMeta">Tap edit to add your details</p>
-    </div>
-    <button class="edit-profile-btn" onclick="openProfileEditor()" id="editProfileBtn">Edit</button>
+
+<!-- PROFILE -->
+
+<div class="profile-card">
+
+  <div class="avatar" id="avatarInitial">
+    ?
   </div>
 
-  <div class="card" style="margin-bottom:18px;border-left:5px solid var(--danger);">
-    <div class="panel-header" style="margin-bottom:0"><div><h3>🚨 Need healthcare assistance?</h3><div class="sub">Request a callback from a community healthcare worker. This does not provide diagnosis.</div></div><button class="btn" onclick="requestAssistance()">Request assistance</button></div>
-    <div id="assistanceStatus"></div>
+  <div class="profile-info">
+
+```
+<h2 id="profileName">
+  Set up your profile
+</h2>
+
+<p id="profileMeta">
+  Tap edit to add your details
+</p>
+```
+
   </div>
 
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="careflow" onclick="showTab('careflow')">
-      <span id="tabCareflow">CareFlow</span><span class="module-badge">Module 1</span>
-    </button>
-    <button class="tab-btn" data-tab="meds" onclick="showTab('meds')">
-      <span id="tabMeds">MedCare</span><span class="module-badge">Module 2</span>
-    </button>
-    <button class="tab-btn" data-tab="offline" onclick="showTab('offline')">
-      <span id="tabVault">HealthVault</span><span class="module-badge">Module 3</span>
-    </button>
-    <button class="tab-btn" data-tab="dashboard" onclick="showTab('dashboard')">
-      <span id="tabDashboard">Worker Dashboard</span>
-    </button>
+<button
+class="edit-profile-btn"
+onclick="openProfileEditor()"
+id="editProfileBtn"
+
+>
+
+```
+Edit
+```
+
+  </button>
+
+</div>
+
+<!-- ASSISTANCE -->
+
+<div
+  class="card"
+  style="margin-bottom:18px;border-left:5px solid var(--danger);"
+>
+
+  <div
+    class="panel-header"
+    style="margin-bottom:0"
+  >
+
+```
+<div>
+
+  <h3>
+    🚨 Need healthcare assistance?
+  </h3>
+
+  <div class="sub">
+    Request a callback from a community healthcare worker.
+    This does not provide diagnosis.
   </div>
 
-  <!-- MODULE 1: APPOINTMENTS -->
-  <section class="panel active" id="panel-appointments">
-    <div class="panel-header">
-      <div>
-        <h2 id="apptHeading">Appointments &amp; Queue</h2>
-        <div class="sub" id="apptSub">Book a visit and track your place in the queue</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="form-row">
-        <input type="text" id="apptDoctor" placeholder="Doctor / clinic name">
-        <select id="apptType">
-          <option value="General">General checkup</option>
-          <option value="Follow-up">Follow-up</option>
-          <option value="Vaccination">Vaccination</option>
-          <option value="Prenatal">Prenatal care</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <input type="date" id="apptDate">
-        <input type="time" id="apptTime">
-        <button class="btn" onclick="addAppointment()" id="apptAddBtn">Book Appointment</button>
-      </div>
-    </div>
-    <div class="card">
-      <div id="apptList"></div>
-    </div>
-  </section>
+</div>
 
-  <!-- MODULE 2: MEDICATION -->
-  <section class="panel" id="panel-meds">
-    <div class="panel-header">
-      <div>
-        <h2 id="medsHeading">Medication Reminders</h2>
-        <div class="sub" id="medsSub">Never miss a dose — track what's due today</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="panel-header"><div><h3>Current Prescription</h3><div class="sub">Demo prescription information for care coordination.</div></div><span class="queue-tag">Active</span></div>
-      <div class="list-item"><div class="list-icon">💊</div><div class="list-body"><div class="list-title">Metformin — 500 mg</div><div class="list-sub">After breakfast · as prescribed by healthcare professional</div></div></div>
-      <div class="list-item"><div class="list-icon">💊</div><div class="list-body"><div class="list-title">Vitamin D — 1 tablet</div><div class="list-sub">Evening · follow prescribed schedule</div></div></div>
-      <div class="list-item"><div class="list-icon">📅</div><div class="list-body"><div class="list-title">Next follow-up</div><div class="list-sub">04 September 2026 · Primary Health Centre</div></div></div>
-    </div>
-    <div class="card">
-      <div class="form-row">
-        <input type="text" id="medName" placeholder="Medicine name (e.g. Paracetamol)">
-        <input type="text" id="medDose" placeholder="Dose (e.g. 1 tablet)">
-      </div>
-      <div class="form-row">
-        <input type="time" id="medTime">
-        <select id="medFreq">
-          <option value="Once daily">Once daily</option>
-          <option value="Twice daily">Twice daily</option>
-          <option value="Thrice daily">Thrice daily</option>
-          <option value="As needed">As needed</option>
-        </select>
-        <button class="btn" onclick="addMed()" id="medAddBtn">Add Medicine</button>
-      </div>
-    </div>
-    <div class="card">
-      <div id="medList"></div>
-    </div>
-  </section>
+<button
+  class="btn"
+  onclick="requestAssistance()"
+>
+  Request assistance
+</button>
+```
 
-  <!-- MODULE 3: OFFLINE -->
-  <section class="panel" id="panel-healthvault">
-    <div class="panel-header">
-      <div>
-        <h2 id="vaultHeading">HealthVault</h2>
-        <div class="sub" id="vaultSub">Medical history, reports and care timeline — available in one place</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="list-item">
-        <div class="list-icon">📶</div>
-        <div class="list-body">
-          <div class="list-title" id="vaultTimelineTitle">Medical timeline</div>
-          <div class="list-sub" id="vaultTimelineSub">Your recent healthcare activity</div>
-        </div>
-      </div>
-      <div class="list-item">
-        <div class="list-icon">💾</div>
-        <div class="list-body">
-          <div class="list-title" id="vaultRecordsTitle">Health records</div>
-          <div class="list-sub" id="vaultRecordsSub">No records yet</div>
-        </div>
-      </div>
-      <div class="list-item">
-        <div class="list-icon">🔄</div>
-        <div class="list-body">
-          <div class="list-title" id="vaultProfileTitle">Patient snapshot</div>
-          <div class="list-sub" id="vaultProfileSub">Key information to carry to your next visit</div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <button class="btn" onclick="showTab('offline')" id="openOfflineBtn">Open Offline Mode</button>
-    </div>
-    <div class="card">
-      <div class="panel-header"><div><h3>Medical Timeline</h3><div class="sub">Consultations, reports and prescriptions in chronological order.</div></div><button class="btn" onclick="addDemoRecord()">+ Add record</button></div>
-      <div id="medicalTimeline"></div>
-    </div>
-    <div class="card">
-      <div class="panel-header"><div><h3>Patient Snapshot</h3><div class="sub">Information a healthcare worker can quickly review.</div></div></div>
-      <div class="form-row"><div class="list-item"><div class="list-icon">👤</div><div class="list-body"><div class="list-title" id="vaultPatientName">Patient</div><div class="list-sub" id="vaultPatientMeta">—</div></div></div></div>
-      <div class="form-row"><div class="list-item"><div class="list-icon">🩸</div><div class="list-body"><div class="list-title">Blood group</div><div class="list-sub" id="vaultBlood">Not specified</div></div></div><div class="list-item"><div class="list-icon">📋</div><div class="list-body"><div class="list-title">Active medicines</div><div class="list-sub" id="vaultMedCount">0</div></div></div></div>
-    </div>
-  </section>
+  </div>
 
-  <!-- OFFLINE-FIRST ACCESS -->
-  <section class="panel" id="panel-offline">
-    <div class="panel-header"><div><h2 id="offlineHeading">Offline-first Access</h2><div class="sub" id="offlineSub">Essential information remains available when connectivity drops.</div></div></div>
-    <div class="card">
-      <div class="list-item"><div class="list-icon">📶</div><div class="list-body"><div class="list-title" id="offlineStatusTitle">Connection status</div><div class="list-sub" id="offlineStatusSub">Checking...</div></div><span class="queue-tag" id="offlineBadge">Online</span></div>
-      <div class="list-item"><div class="list-icon">💾</div><div class="list-body"><div class="list-title">Locally available</div><div class="list-sub" id="offlineStoredSub">0 appointments, 0 medicines, 0 health records</div></div></div>
-      <div class="list-item"><div class="list-icon">🔄</div><div class="list-body"><div class="list-title">Last local save</div><div class="list-sub" id="offlineSyncSub">Saved on this device.</div></div></div>
-    </div>
-    <div class="card"><button class="btn" onclick="simulateOffline()" id="simOfflineBtn">Simulate going offline</button></div>
-  </section>
+  <div id="assistanceStatus"></div>
 
-  <!-- WORKER DASHBOARD -->
-  <section class="panel" id="panel-dashboard">
-    <div class="panel-header">
-      <div>
-        <h2 id="dashHeading">Health Worker Dashboard</h2>
-        <div class="sub" id="dashSub">Read-only view for community health workers</div>
-      </div>
+</div>
+
+<!-- NAVIGATION -->
+
+<div class="tabs">
+
+<button
+class="tab-btn active"
+data-tab="careflow"
+onclick="showTab('careflow')"
+
+>
+
+```
+<span id="tabCareflow">CareFlow</span>
+```
+
+```
+<span class="module-badge">Module 1</span>
+```
+
+  </button>
+
+<button
+class="tab-btn"
+data-tab="meds"
+onclick="showTab('meds')"
+
+>
+
+```
+<span id="tabMeds">MedCare</span>
+```
+
+```
+<span class="module-badge">Module 2</span>
+```
+
+  </button>
+
+  <!-- FIXED: THIS NOW OPENS HEALTHVAULT -->
+
+<button
+class="tab-btn"
+data-tab="healthvault"
+onclick="showTab('healthvault')"
+
+>
+
+```
+<span id="tabVault">HealthVault</span>
+```
+
+```
+<span class="module-badge">Module 3</span>
+```
+
+  </button>
+
+<button
+class="tab-btn"
+data-tab="dashboard"
+onclick="showTab('dashboard')"
+
+>
+
+```
+<span id="tabDashboard">Worker Dashboard</span>
+```
+
+  </button>
+
+</div>
+
+<!-- MODULE 1 -->
+
+<section
+  class="panel active"
+  id="panel-careflow"
+>
+
+  <div class="panel-header">
+
+```
+<div>
+  <h2 id="apptHeading">
+    Appointments & Queue
+  </h2>
+
+  <div class="sub" id="apptSub">
+    Book a visit and track your place in the queue
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="card">
+
+```
+<div class="form-row">
+
+  <input
+    type="text"
+    id="apptDoctor"
+    placeholder="Doctor / clinic name"
+  >
+
+  <select id="apptType">
+
+    <option value="General">
+      General checkup
+    </option>
+
+    <option value="Follow-up">
+      Follow-up
+    </option>
+
+    <option value="Vaccination">
+      Vaccination
+    </option>
+
+    <option value="Prenatal">
+      Prenatal care
+    </option>
+
+    <option value="Other">
+      Other
+    </option>
+
+  </select>
+
+</div>
+
+
+<div class="form-row">
+
+  <input
+    type="date"
+    id="apptDate"
+  >
+
+  <input
+    type="time"
+    id="apptTime"
+  >
+
+  <button
+    class="btn"
+    onclick="addAppointment()"
+    id="apptAddBtn"
+  >
+    Book Appointment
+  </button>
+
+</div>
+```
+
+  </div>
+
+  <div class="card">
+    <div id="apptList"></div>
+  </div>
+
+</section>
+
+<!-- MODULE 2 -->
+
+<section
+  class="panel"
+  id="panel-meds"
+>
+
+  <div class="panel-header">
+
+```
+<div>
+
+  <h2 id="medsHeading">
+    Medication Reminders
+  </h2>
+
+  <div class="sub" id="medsSub">
+    Never miss a dose — track what's due today
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <div class="card">
+
+```
+<div class="panel-header">
+
+  <div>
+
+    <h3>
+      Current Prescription
+    </h3>
+
+    <div class="sub">
+      Demo prescription information for care coordination.
     </div>
-    <div class="card">
-      <table class="dash-table">
-        <thead>
-          <tr>
-            <th id="thPatient">Patient</th>
-            <th id="thUpcoming">Upcoming Visit</th>
-            <th id="thMeds">Active Medicines</th>
-            <th id="thStatus">Status</th>
-          </tr>
-        </thead>
-        <tbody id="dashBody"></tbody>
-      </table>
+
+  </div>
+
+  <span class="queue-tag">
+    Active
+  </span>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    💊
+  </div>
+
+  <div class="list-body">
+
+    <div class="list-title">
+      Metformin — 500 mg
     </div>
-  </section>
+
+    <div class="list-sub">
+      After breakfast · as prescribed by healthcare professional
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    💊
+  </div>
+
+  <div class="list-body">
+
+    <div class="list-title">
+      Vitamin D — 1 tablet
+    </div>
+
+    <div class="list-sub">
+      Evening · follow prescribed schedule
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    📅
+  </div>
+
+  <div class="list-body">
+
+    <div class="list-title">
+      Next follow-up
+    </div>
+
+    <div class="list-sub">
+      04 September 2026 · Primary Health Centre
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- VOICE PRESCRIPTION -->
+
+  <div class="card">
+
+```
+<div class="panel-header">
+
+  <div>
+
+    <h3>
+      🎤 Voice Prescription
+    </h3>
+
+    <div class="sub">
+      Speak the medicine details and Sahaay Saathi will fill the form.
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="form-row">
+
+  <div
+    style="
+      display:flex;
+      gap:8px;
+      flex:1;
+      min-width:220px;
+    "
+  >
+
+    <input
+      type="text"
+      id="medName"
+      placeholder="Medicine name"
+      style="flex:1;"
+    >
+
+    <button
+      type="button"
+      class="btn voice-btn"
+      id="voicePrescriptionBtn"
+      onclick="startVoicePrescription()"
+      title="Enter medicine using your voice"
+    >
+      🎤 Voice
+    </button>
+
+  </div>
+
+
+  <input
+    type="text"
+    id="medDose"
+    placeholder="Dose (e.g. 500 mg)"
+  >
+
+
+  <input
+    type="text"
+    id="medInstructions"
+    placeholder="Instructions (e.g. after food)"
+  >
+
+</div>
+
+
+<div class="form-row">
+
+  <input
+    type="time"
+    id="medTime"
+  >
+
+
+  <select id="medFreq">
+
+    <option value="Once daily">
+      Once daily
+    </option>
+
+    <option value="Twice daily">
+      Twice daily
+    </option>
+
+    <option value="Thrice daily">
+      Thrice daily
+    </option>
+
+    <option value="As needed">
+      As needed
+    </option>
+
+  </select>
+
+
+  <button
+    class="btn"
+    onclick="addMed()"
+    id="medAddBtn"
+  >
+    Add Medicine
+  </button>
+
+</div>
+
+
+<div
+  id="voiceStatus"
+  style="
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:6px;
+  "
+></div>
+```
+
+  </div>
+
+  <div class="card">
+
+```
+<div id="medList"></div>
+```
+
+  </div>
+
+</section>
+
+<!-- MODULE 3 HEALTHVAULT -->
+
+<section
+  class="panel"
+  id="panel-healthvault"
+>
+
+  <div class="panel-header">
+
+```
+<div>
+
+  <h2 id="vaultHeading">
+    HealthVault
+  </h2>
+
+  <div class="sub" id="vaultSub">
+    Medical history, medicines, reports and care timeline —
+    available in one place
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- SUMMARY -->
+
+  <div class="vault-summary">
+
+```
+<div class="vault-stat">
+
+  <span>
+    Patient
+  </span>
+
+  <strong id="vaultSummaryPatient">
+    —
+  </strong>
+
+</div>
+
+
+<div class="vault-stat">
+
+  <span>
+    Active medicines
+  </span>
+
+  <strong id="vaultSummaryMeds">
+    0
+  </strong>
+
+</div>
+
+
+<div class="vault-stat">
+
+  <span>
+    Health records
+  </span>
+
+  <strong id="vaultSummaryRecords">
+    0
+  </strong>
+
+</div>
+```
+
+  </div>
+
+  <!-- PATIENT SNAPSHOT -->
+
+  <div class="card">
+
+```
+<div class="panel-header">
+
+  <div>
+
+    <h3>
+      👤 Patient Snapshot
+    </h3>
+
+    <div class="sub">
+      Information a healthcare worker can quickly review.
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    👤
+  </div>
+
+  <div class="list-body">
+
+    <div
+      class="list-title"
+      id="vaultPatientName"
+    >
+      Patient
+    </div>
+
+    <div
+      class="list-sub"
+      id="vaultPatientMeta"
+    >
+      —
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    🩸
+  </div>
+
+  <div class="list-body">
+
+    <div class="list-title">
+      Blood group
+    </div>
+
+    <div
+      class="list-sub"
+      id="vaultBlood"
+    >
+      Not specified
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- ACTIVE MEDICINES -->
+
+  <div class="card">
+
+```
+<div class="panel-header">
+
+  <div>
+
+    <h3>
+      💊 Active Medicines
+    </h3>
+
+    <div class="sub">
+      Medicines currently saved in MedCare.
+    </div>
+
+  </div>
+
+  <span
+    class="queue-tag"
+    id="vaultMedCount"
+  >
+    0 active medicine(s)
+  </span>
+
+</div>
+
+
+<div id="vaultMedDetails"></div>
+```
+
+  </div>
+
+  <!-- MEDICAL TIMELINE -->
+
+  <div class="card">
+
+```
+<div class="panel-header">
+
+  <div>
+
+    <h3>
+      🩺 Medical Timeline
+    </h3>
+
+    <div class="sub">
+      Consultations, reports and prescriptions in chronological order.
+    </div>
+
+  </div>
+
+  <button
+    class="btn"
+    onclick="addDemoRecord()"
+  >
+    + Add record
+  </button>
+
+</div>
+
+
+<div id="medicalTimeline"></div>
+```
+
+  </div>
+
+  <!-- OFFLINE INFO -->
+
+  <div class="card">
+
+```
+<div class="panel-header">
+
+  <div>
+
+    <h3>
+      💾 Offline-first storage
+    </h3>
+
+    <div class="sub">
+      Your health information is stored locally on this device.
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    📶
+  </div>
+
+  <div class="list-body">
+
+    <div class="list-title">
+      Connection
+    </div>
+
+    <div
+      class="list-sub"
+      id="vaultConnection"
+    >
+      Checking...
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="list-item">
+
+  <div class="list-icon">
+    💾
+  </div>
+
+  <div class="list-body">
+
+    <div class="list-title">
+      Local data
+    </div>
+
+    <div
+      class="list-sub"
+      id="vaultLocalData"
+    >
+      —
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- WORKER DASHBOARD -->
+
+<section
+  class="panel"
+  id="panel-dashboard"
+>
+
+  <div class="panel-header">
+
+```
+<div>
+
+  <h2 id="dashHeading">
+    Health Worker Dashboard
+  </h2>
+
+  <div class="sub" id="dashSub">
+    Read-only view for community health workers
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <div class="card">
+
+```
+<table class="dash-table">
+
+  <thead>
+
+    <tr>
+
+      <th id="thPatient">
+        Patient
+      </th>
+
+      <th id="thUpcoming">
+        Upcoming Visit
+      </th>
+
+      <th id="thMeds">
+        Active Medicines
+      </th>
+
+      <th id="thStatus">
+        Status
+      </th>
+
+    </tr>
+
+  </thead>
+
+  <tbody id="dashBody"></tbody>
+
+</table>
+```
+
+  </div>
+
+</section>
+
 </main>
 
-<footer id="footerText">Sahaay Saathi — PS-02 · Community Healthcare Companion · Built for HealthTech / Rural Access</footer>
+<!-- SOS -->
 
-<script>
-/* ---------------- STATE (offline-first: everything in localStorage) ---------------- */
-const STORE_KEY = 'sahaay_saathi_data_v1';
-
-function loadData() {
-  const raw = localStorage.getItem(STORE_KEY);
-  if (raw) return JSON.parse(raw);
-  return { profile: null, appointments: [], meds: [], records: [
-    {date:'2026-08-21', type:'Consultation', title:'Follow-up consultation', provider:'Dr. Sharma · General Medicine'},
-    {date:'2026-08-10', type:'Blood Report', title:'Routine blood test', provider:'Primary Health Centre'},
-    {date:'2026-07-29', type:'Prescription', title:'Medication prescription', provider:'Dr. Sharma · General Medicine'}
-  ], assistance: null };
-}
-function saveData() {
-  localStorage.setItem(STORE_KEY, JSON.stringify(data));
-  updateOfflinePanel();
-  renderDashboard();
-  renderHealthVault();
-  renderAssistance();
-}
-let data = loadData();
-data.records = data.records || [];
-data.assistance = data.assistance || null;
-data.appointments = (data.appointments || []).map((a,i)=>({...a, token:a.token||('A'+(27+i)), ahead:a.ahead ?? Math.max(2,6-i)}));
-
-/* ---------------- LANGUAGE ---------------- */
-const strings = {
-  en: {
-    appTitle: "Sahaay Saathi", appTagline: "Community Healthcare Companion",
-    disclaimer: "<strong>Note:</strong> Sahaay Saathi helps you manage appointments, medicines and records — it does not diagnose conditions or replace advice from a qualified doctor.",
-    tabAppointments: "CareFlow", tabMeds: "MedCare", tabOffline: "HealthVault", tabDashboard: "Worker Dashboard",
-    apptHeading: "Appointments & Queue", apptSub: "Book a visit and track your place in the queue",
-    apptAddBtn: "Book Appointment",
-    medsHeading: "Medication Reminders", medsSub: "Never miss a dose — track what's due today",
-    medAddBtn: "Add Medicine",
-    offlineHeading: "Offline Access", offlineSub: "Your data stays on this device and works without internet",
-    offlineStatusTitle: "Connection status", offlineStoredTitle: "Locally stored records",
-    offlineSyncTitle: "Last sync", offlineSyncSub: "All changes are saved instantly to this device — no data loss if internet drops",
-    simOfflineBtn: "Simulate going offline",
-    dashHeading: "Health Worker Dashboard", dashSub: "Read-only view for community health workers",
-    thPatient: "Patient", thUpcoming: "Upcoming Visit", thMeds: "Active Medicines", thStatus: "Status",
-    editProfileBtn: "Edit", footerText: "Sahaay Saathi — PS-02 · Community Healthcare Companion · Built for HealthTech / Rural Access",
-    online: "Online", offline: "Offline — changes saved locally"
-  },
-  hi: {
-    appTitle: "सेहत साथी", appTagline: "सामुदायिक स्वास्थ्य सहायक",
-    disclaimer: "<strong>ध्यान दें:</strong> सेहत साथी अपॉइंटमेंट, दवाइयों और रिकॉर्ड में मदद करता है — यह बीमारी की जांच नहीं करता और डॉक्टर की सलाह का विकल्प नहीं है।",
-    tabAppointments: "केयरफ्लो", tabMeds: "मेडकेयर", tabOffline: "हेल्थवॉल्ट", tabDashboard: "वर्कर डैशबोर्ड",
-    apptHeading: "अपॉइंटमेंट और कतार", apptSub: "विज़िट बुक करें और अपनी कतार की स्थिति देखें",
-    apptAddBtn: "अपॉइंटमेंट बुक करें",
-    medsHeading: "दवा अनुस्मारक", medsSub: "कोई खुराक न छूटे — आज की दवाइयां देखें",
-    medAddBtn: "दवा जोड़ें",
-    offlineHeading: "ऑफ़लाइन एक्सेस", offlineSub: "आपका डेटा इस डिवाइस पर सुरक्षित रहता है और बिना इंटरनेट के भी काम करता है",
-    offlineStatusTitle: "कनेक्शन स्थिति", offlineStoredTitle: "स्थानीय रूप से संग्रहीत रिकॉर्ड",
-    offlineSyncTitle: "अंतिम सिंक", offlineSyncSub: "सभी बदलाव तुरंत इस डिवाइस पर सेव हो जाते हैं — इंटरनेट न होने पर भी डेटा सुरक्षित रहता है",
-    simOfflineBtn: "ऑफ़लाइन होने का अनुकरण करें",
-    dashHeading: "स्वास्थ्य कार्यकर्ता डैशबोर्ड", dashSub: "सामुदायिक स्वास्थ्य कार्यकर्ताओं के लिए केवल-पठन दृश्य",
-    thPatient: "मरीज़", thUpcoming: "आगामी विज़िट", thMeds: "सक्रिय दवाइयां", thStatus: "स्थिति",
-    editProfileBtn: "संपादित करें", footerText: "सेहत साथी — PS-02 · सामुदायिक स्वास्थ्य सहायक · HealthTech / Rural Access के लिए निर्मित",
-    online: "ऑनलाइन", offline: "ऑफ़लाइन — बदलाव स्थानीय रूप से सेव किए गए"
-  }
-};
-
-function setLanguage(lang) {
-  localStorage.setItem('sahaay_saathi_lang', lang);
-  const s = strings[lang];
-  document.getElementById('appTitle').textContent = s.appTitle;
-  document.getElementById('appTagline').textContent = s.appTagline;
-  document.getElementById('disclaimerText').innerHTML = s.disclaimer;
-  document.getElementById('tabCareflow').textContent = s.tabAppointments;
-  document.getElementById('tabMeds').textContent = s.tabMeds;
-  document.getElementById('tabVault').textContent = s.tabOffline;
-  document.getElementById('tabDashboard').textContent = s.tabDashboard;
-  document.getElementById('apptHeading').textContent = s.apptHeading;
-  document.getElementById('apptSub').textContent = s.apptSub;
-  document.getElementById('apptAddBtn').textContent = s.apptAddBtn;
-  document.getElementById('medsHeading').textContent = s.medsHeading;
-  document.getElementById('medsSub').textContent = s.medsSub;
-  document.getElementById('medAddBtn').textContent = s.medAddBtn;
-  document.getElementById('offlineHeading').textContent = s.offlineHeading;
-  document.getElementById('offlineSub').textContent = s.offlineSub;
-  document.getElementById('offlineStatusTitle').textContent = s.offlineStatusTitle;
-  document.getElementById('offlineStoredTitle').textContent = s.offlineStoredTitle;
-  document.getElementById('offlineSyncTitle').textContent = s.offlineSyncTitle;
-  document.getElementById('offlineSyncSub').textContent = s.offlineSyncSub;
-  document.getElementById('simOfflineBtn').textContent = s.simOfflineBtn;
-  document.getElementById('dashHeading').textContent = s.dashHeading;
-  document.getElementById('dashSub').textContent = s.dashSub;
-  document.getElementById('thPatient').textContent = s.thPatient;
-  document.getElementById('thUpcoming').textContent = s.thUpcoming;
-  document.getElementById('thMeds').textContent = s.thMeds;
-  document.getElementById('thStatus').textContent = s.thStatus;
-  document.getElementById('editProfileBtn').textContent = s.editProfileBtn;
-  document.getElementById('footerText').textContent = s.footerText;
-  document.getElementById('langSelect').value = lang;
-  window.currentLang = lang;
-  updateNetStatus();
-}
-
-/* ---------------- TABS ---------------- */
-function showTab(name) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
-  document.querySelector('.tab-btn[data-tab="' + name + '"]').classList.add('active');
-}
-
-/* ---------------- PROFILE ---------------- */
-function openProfileEditor() {
-  const name = prompt("Patient name:", data.profile?.name || "");
-  if (name === null) return;
-  const age = prompt("Age:", data.profile?.age || "");
-  if (age === null) return;
-  const village = prompt("Village / area:", data.profile?.village || "");
-  data.profile = { name: name.trim() || "Unnamed", age: age.trim(), village: village ? village.trim() : "" };
-  saveData();
-  renderProfile();
-}
-function renderProfile() {
-  const p = data.profile;
-  if (!p) {
-    document.getElementById('avatarInitial').textContent = "?";
-    document.getElementById('profileName').textContent = "Set up your profile";
-    document.getElementById('profileMeta').textContent = "Tap edit to add your details";
-    return;
-  }
-  document.getElementById('avatarInitial').textContent = p.name.charAt(0).toUpperCase();
-  document.getElementById('profileName').textContent = p.name;
-  document.getElementById('profileMeta').textContent = [p.age ? p.age + " yrs" : null, p.village || null].filter(Boolean).join(" · ") || "No additional details";
-}
-
-/* ---------------- APPOINTMENTS (Module 1) ---------------- */
-function addAppointment() {
-  const doctor = document.getElementById('apptDoctor').value.trim();
-  const type = document.getElementById('apptType').value;
-  const date = document.getElementById('apptDate').value;
-  const time = document.getElementById('apptTime').value;
-  if (!doctor || !date || !time) { alert("Please fill in doctor, date and time."); return; }
-  data.appointments.push({ id: Date.now(), doctor, type, date, time, token: 'A' + (27 + data.appointments.length), ahead: Math.max(2, 6 - data.appointments.length) });
-  data.appointments.sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time));
-  document.getElementById('apptDoctor').value = '';
-  document.getElementById('apptDate').value = '';
-  document.getElementById('apptTime').value = '';
-  saveData();
-  renderAppointments();
-}
-function removeAppointment(id) {
-  data.appointments = data.appointments.filter(a => a.id !== id);
-  saveData();
-  renderAppointments();
-}
-function renderAppointments() {
-  const el = document.getElementById('apptList');
-  if (data.appointments.length === 0) {
-    el.innerHTML = '<div class="empty-state"><div class="big">📅</div>No appointments booked yet.</div>';
-    return;
-  }
-  el.innerHTML = data.appointments.map((a, i) => `
-    <div class="list-item">
-      <div class="list-icon">🩺</div>
-      <div class="list-body">
-        <div class="list-title">${a.doctor} <span style="font-weight:400;color:var(--ink-soft)">— ${a.type}</span></div>
-        <div class="list-sub">${a.date} at ${a.time}</div>
-      </div>
-      <div class="queue-tag">Token ${a.token || "A"+(27+i)} · ${a.ahead || 6} ahead</div>
-      <button class="btn secondary" onclick="removeAppointment(${a.id})">Cancel</button>
-    </div>
-  `).join('');
-}
-
-/* ---------------- MEDICINES (Module 2) ---------------- */
-function addMed() {
-  const name = document.getElementById('medName').value.trim();
-  const dose = document.getElementById('medDose').value.trim();
-  const time = document.getElementById('medTime').value;
-  const freq = document.getElementById('medFreq').value;
-  if (!name || !time) { alert("Please fill in medicine name and time."); return; }
-  data.meds.push({ id: Date.now(), name, dose, time, freq, taken: false });
-  document.getElementById('medName').value = '';
-  document.getElementById('medDose').value = '';
-  document.getElementById('medTime').value = '';
-  saveData();
-  renderMeds();
-}
-function toggleMedTaken(id) {
-  const m = data.meds.find(m => m.id === id);
-  if (m) m.taken = !m.taken;
-  saveData();
-  renderMeds();
-}
-function removeMed(id) {
-  data.meds = data.meds.filter(m => m.id !== id);
-  saveData();
-  renderMeds();
-}
-function renderMeds() {
-  const el = document.getElementById('medList');
-  if (data.meds.length === 0) {
-    el.innerHTML = '<div class="empty-state"><div class="big">💊</div>No medicines added yet.</div>';
-    return;
-  }
-  el.innerHTML = data.meds.map(m => `
-    <div class="list-item">
-      <div class="list-icon">💊</div>
-      <div class="list-body">
-        <div class="list-title">${m.name} ${m.dose ? '<span style="font-weight:400;color:var(--ink-soft)">— '+m.dose+'</span>' : ''}</div>
-        <div class="list-sub">${m.freq} · ${m.time}</div>
-      </div>
-      <div class="queue-tag ${m.taken ? 'taken-tag' : 'due-tag'}">${m.taken ? 'Taken today' : 'Due'}</div>
-      <button class="btn ok" style="padding:6px 12px;font-size:12px;" onclick="toggleMedTaken(${m.id})">${m.taken ? 'Undo' : 'Mark taken'}</button>
-      <button class="btn secondary" onclick="removeMed(${m.id})">Remove</button>
-    </div>
-  `).join('');
-}
-
-/* ---------------- OFFLINE (Module 3) ---------------- */
-function updateNetStatus() {
-  const online = navigator.onLine && !window.forcedOffline;
-  const dot = document.getElementById('netDot');
-  const label = document.getElementById('netLabel');
-  const s = strings[window.currentLang || 'en'];
-  dot.classList.toggle('off', !online);
-  label.textContent = online ? s.online : s.offline;
-  updateOfflinePanel(online);
-}
-function updateOfflinePanel(online) {
-  if (online === undefined) online = navigator.onLine && !window.forcedOffline;
-  document.getElementById('offlineStatusSub').textContent = online
-    ? "Connected — local changes are saved and ready to sync"
-    : "No internet connection detected — core care data remains available from local storage";
-  document.getElementById('offlineStoredSub').textContent =
-    `${data.appointments.length} appointment(s), ${data.meds.length} medicine(s), ${(data.records||[]).length} health record(s) saved on this device`;
-  const badge=document.getElementById('offlineBadge');
-  if(badge){badge.textContent=online?'Online':'Offline';badge.classList.toggle('due',!online);}
-  const sync=document.getElementById('offlineSyncSub');
-  if(sync) sync.textContent='Last local save: '+new Date(data.lastSync || Date.now()).toLocaleString();
-}
-function simulateOffline() {
-  window.forcedOffline = !window.forcedOffline;
-  document.getElementById('simOfflineBtn').textContent = window.forcedOffline ? "Back online" : (strings[window.currentLang||'en'].simOfflineBtn);
-  updateNetStatus();
-}
-window.addEventListener('online', updateNetStatus);
-window.addEventListener('offline', updateNetStatus);
-
-/* ---------------- HEALTHVAULT ---------------- */
-function addDemoRecord() {
-  const title = prompt("Record title:", "New consultation");
-  if (title === null) return;
-  const provider = prompt("Provider / note:", "Community Health Centre");
-  data.records = data.records || [];
-  data.records.unshift({date:new Date().toISOString().slice(0,10), type:"Consultation", title:title.trim() || "Consultation", provider:provider ? provider.trim() : "Community Health Centre"});
-  saveData(); renderHealthVault();
-}
-function renderHealthVault(){
-  const p=data.profile||{};
-  const name=document.getElementById('vaultPatientName'); if(name) name.textContent=p.name||'Patient';
-  const meta=document.getElementById('vaultPatientMeta'); if(meta) meta.textContent=[p.age?p.age+' yrs':null,p.village||null].filter(Boolean).join(' · ')||'No profile details';
-  const blood=document.getElementById('vaultBlood'); if(blood) blood.textContent=p.blood||'Not specified';
-  const mc=document.getElementById('vaultMedCount'); if(mc) mc.textContent=(data.meds||[]).length+' active medicine(s)';
-  const el=document.getElementById('medicalTimeline'); if(!el)return;
-  const records=data.records||[];
-  if(!records.length){el.innerHTML='<div class="empty-state"><div class="big">🩺</div>No medical records yet.</div>';return;}
-  el.innerHTML=records.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(r=>`<div class="list-item"><div class="list-icon">${r.type==='Blood Report'?'🧪':r.type==='Prescription'?'💊':r.type==='Vaccination'?'💉':'🩺'}</div><div class="list-body"><div class="list-title">${r.title} <span style="font-weight:400;color:var(--ink-soft)">— ${r.type}</span></div><div class="list-sub">${r.date||'—'} · ${r.provider||'Healthcare centre'}</div></div><span class="queue-tag">Saved</span></div>`).join('');
-}
-
-/* ---------------- ASSISTANCE ---------------- */
-function requestAssistance(){
-  data.assistance={id:Date.now(),status:'received',created:new Date().toISOString()};
-  saveData(); renderAssistance(); alert('Assistance request sent to the community healthcare worker.');
-}
-function renderAssistance(){
-  const el=document.getElementById('assistanceStatus'); if(!el)return;
-  if(!data.assistance){el.innerHTML='';return;}
-  el.innerHTML='<div style="margin-top:10px;padding:10px 12px;background:#FBF3E4;border-radius:10px;font-size:12px;"><strong>✓ Request received</strong> · Worker notification pending · No diagnosis is provided by Sahaay Saathi.</div>';
-}
-
-/* ---------------- DASHBOARD ---------------- */
-function renderDashboard() {
-  const body = document.getElementById('dashBody');
-  const p = data.profile;
-  if (!p) {
-    body.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-soft);padding:20px;">No patient profile set up yet.</td></tr>';
-    return;
-  }
-  const nextAppt = data.appointments[0];
-  const activeMeds = data.meds.length;
-  const status = data.meds.some(m => !m.taken) ? 'Action needed' : 'Up to date';
-  const dotColor = status === 'Action needed' ? 'var(--clay)' : 'var(--ok)';
-  body.innerHTML = `
-    <tr>
-      <td><strong>${p.name}</strong><br><span style="color:var(--ink-soft);font-size:12px;">${p.age ? p.age+' yrs · ' : ''}${p.village || ''}</span></td>
-      <td>${nextAppt ? nextAppt.date + ' ' + nextAppt.time : '—'}</td>
-      <td>${activeMeds}</td>
-      <td><span class="risk-dot" style="background:${dotColor}"></span>${status}</td>
-    </tr>
-  `;
-}
-
-/* ---------------- INIT ---------------- */
-function init() {
-  if(!data.profile){ data.profile={name:'Ramesh Kumar',age:'42',village:'Rampur',blood:'B+'}; saveData(); }
-  const savedLang = localStorage.getItem('sahaay_saathi_lang') || 'en';
-  setLanguage(savedLang);
-  renderProfile();
-  renderAppointments();
-  renderMeds();
-  updateNetStatus();
-  renderDashboard();
-  renderHealthVault();
-  renderAssistance();
-}
-init();
-</script>
-<!-- Sahaay Emergency Assistance -->
-
-<div id="sos-card" style="
-  margin: 25px auto;
-  max-width: 900px;
-  padding: 20px;
-  border-radius: 14px;
-  background: #fff5f5;
-  border: 1px solid #f0caca;
-">
+<div class="sos-card">
 
   <h2 style="margin-top:0;">
     🚨 Emergency Assistance
@@ -840,83 +1445,2327 @@ init();
     to send an emergency assistance request.
   </p>
 
-  <button
-    onclick="openSahaaySOS()"
-    style="
-      background:#b42318;
-      color:white;
-      border:none;
-      padding:14px 25px;
-      border-radius:9px;
-      font-size:17px;
-      font-weight:bold;
-      cursor:pointer;
-    "
-  >
-    🚨 Request SOS Assistance
+<button
+class="sos-button"
+onclick="openSahaaySOS()"
+
+>
+
+```
+🚨 Request SOS Assistance
+```
+
   </button>
 
 </div>
 
+<footer id="footerText">
+  Sahaay Saathi — PS-02 · Community Healthcare Companion · Built for HealthTech / Rural Access
+</footer>
+
 <script>
 
-async function openSahaaySOS() {
+/* =========================================================
+   SAHAAY SAATHI
+   MAIN APPLICATION
+   ========================================================= */
 
-  const confirmed = confirm(
-    "Are you sure you want to request emergency assistance?"
-  );
+const STORE_KEY = "sahaay_saathi_data_v2";
 
-  if (!confirmed) {
-    return;
+let data = loadData();
+
+let currentLang =
+  localStorage.getItem("sahaay_saathi_lang") || "en";
+
+let voiceRecognition = null;
+let isListening = false;
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+function loadData(){
+
+  const raw =
+    localStorage.getItem(STORE_KEY);
+
+  if(raw){
+
+    try{
+
+      return JSON.parse(raw);
+
+    }catch(error){
+
+      console.error("Could not load saved data:",error);
+
+    }
+
   }
 
-  const pin = prompt(
-    "Enter your SOS authorization PIN:"
-  );
+  return {
 
-  if (!pin) {
-    return;
-  }
+    profile:{
+      name:"Ramesh Kumar",
+      age:"42",
+      village:"Rampur",
+      blood:"B+"
+    },
 
-  try {
+    appointments:[],
 
-    const response = await fetch(
-      "/api/sos",
+    meds:[],
+
+    records:[
       {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          pin: pin
-        })
+        date:"2026-08-21",
+        type:"Consultation",
+        title:"Follow-up consultation",
+        provider:"Dr. Sharma · General Medicine"
+      },
+      {
+        date:"2026-08-10",
+        type:"Blood Report",
+        title:"Routine blood test",
+        provider:"Primary Health Centre"
+      },
+      {
+        date:"2026-07-29",
+        type:"Prescription",
+        title:"Medication prescription",
+        provider:"Dr. Sharma · General Medicine"
       }
+    ],
+
+    assistance:null,
+
+    lastSync:Date.now()
+
+  };
+
+}
+
+
+function saveData(){
+
+  data.lastSync = Date.now();
+
+  localStorage.setItem(
+    STORE_KEY,
+    JSON.stringify(data)
+  );
+
+  renderProfile();
+  renderAppointments();
+  renderMeds();
+  renderHealthVault();
+  renderDashboard();
+  renderAssistance();
+  updateOfflineInfo();
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+const strings = {
+
+  en:{
+
+    appTitle:"Sahaay Saathi",
+
+    appTagline:
+      "Community Healthcare Companion",
+
+    disclaimer:
+      "<strong>Note:</strong> Sahaay Saathi helps you manage appointments, medicines and records — it does not diagnose conditions or replace advice from a qualified doctor.",
+
+    tabCareflow:"CareFlow",
+
+    tabMeds:"MedCare",
+
+    tabVault:"HealthVault",
+
+    tabDashboard:"Worker Dashboard",
+
+    apptHeading:
+      "Appointments & Queue",
+
+    apptSub:
+      "Book a visit and track your place in the queue",
+
+    apptAddBtn:
+      "Book Appointment",
+
+    medsHeading:
+      "Medication Reminders",
+
+    medsSub:
+      "Never miss a dose — track what's due today",
+
+    medAddBtn:
+      "Add Medicine",
+
+    vaultHeading:
+      "HealthVault",
+
+    vaultSub:
+      "Medical history, medicines, reports and care timeline — available in one place",
+
+    dashHeading:
+      "Health Worker Dashboard",
+
+    dashSub:
+      "Read-only view for community health workers",
+
+    thPatient:"Patient",
+
+    thUpcoming:"Upcoming Visit",
+
+    thMeds:"Active Medicines",
+
+    thStatus:"Status",
+
+    editProfileBtn:"Edit",
+
+    footerText:
+      "Sahaay Saathi — PS-02 · Community Healthcare Companion · Built for HealthTech / Rural Access",
+
+    online:"Online",
+
+    offline:
+      "Offline — changes saved locally"
+
+  },
+
+  hi:{
+
+    appTitle:"सेहत साथी",
+
+    appTagline:
+      "सामुदायिक स्वास्थ्य सहायक",
+
+    disclaimer:
+      "<strong>ध्यान दें:</strong> सेहत साथी अपॉइंटमेंट, दवाइयों और रिकॉर्ड में मदद करता है — यह बीमारी की जांच नहीं करता और डॉक्टर की सलाह का विकल्प नहीं है।",
+
+    tabCareflow:"केयरफ्लो",
+
+    tabMeds:"मेडकेयर",
+
+    tabVault:"हेल्थवॉल्ट",
+
+    tabDashboard:"वर्कर डैशबोर्ड",
+
+    apptHeading:
+      "अपॉइंटमेंट और कतार",
+
+    apptSub:
+      "विज़िट बुक करें और अपनी कतार की स्थिति देखें",
+
+    apptAddBtn:
+      "अपॉइंटमेंट बुक करें",
+
+    medsHeading:
+      "दवा अनुस्मारक",
+
+    medsSub:
+      "कोई खुराक न छूटे — आज की दवाइयां देखें",
+
+    medAddBtn:
+      "दवा जोड़ें",
+
+    vaultHeading:
+      "हेल्थवॉल्ट",
+
+    vaultSub:
+      "आपका मेडिकल इतिहास, दवाइयां, रिपोर्ट और रिकॉर्ड एक जगह",
+
+    dashHeading:
+      "स्वास्थ्य कार्यकर्ता डैशबोर्ड",
+
+    dashSub:
+      "सामुदायिक स्वास्थ्य कार्यकर्ताओं के लिए केवल-पठन दृश्य",
+
+    thPatient:"मरीज़",
+
+    thUpcoming:"आगामी विज़िट",
+
+    thMeds:"सक्रिय दवाइयां",
+
+    thStatus:"स्थिति",
+
+    editProfileBtn:"संपादित करें",
+
+    footerText:
+      "सेहत साथी — PS-02 · सामुदायिक स्वास्थ्य सहायक · HealthTech / Rural Access के लिए निर्मित",
+
+    online:"ऑनलाइन",
+
+    offline:
+      "ऑफ़लाइन — बदलाव स्थानीय रूप से सेव किए गए"
+
+  }
+
+};
+
+
+function setLanguage(lang){
+
+  currentLang = lang;
+
+  localStorage.setItem(
+    "sahaay_saathi_lang",
+    lang
+  );
+
+  const s = strings[lang];
+
+  document.getElementById("appTitle").textContent =
+    s.appTitle;
+
+  document.getElementById("appTagline").textContent =
+    s.appTagline;
+
+  document.getElementById("disclaimerText").innerHTML =
+    s.disclaimer;
+
+  document.getElementById("tabCareflow").textContent =
+    s.tabCareflow;
+
+  document.getElementById("tabMeds").textContent =
+    s.tabMeds;
+
+  document.getElementById("tabVault").textContent =
+    s.tabVault;
+
+  document.getElementById("tabDashboard").textContent =
+    s.tabDashboard;
+
+  document.getElementById("apptHeading").textContent =
+    s.apptHeading;
+
+  document.getElementById("apptSub").textContent =
+    s.apptSub;
+
+  document.getElementById("apptAddBtn").textContent =
+    s.apptAddBtn;
+
+  document.getElementById("medsHeading").textContent =
+    s.medsHeading;
+
+  document.getElementById("medsSub").textContent =
+    s.medsSub;
+
+  document.getElementById("medAddBtn").textContent =
+    s.medAddBtn;
+
+  document.getElementById("vaultHeading").textContent =
+    s.vaultHeading;
+
+  document.getElementById("vaultSub").textContent =
+    s.vaultSub;
+
+  document.getElementById("dashHeading").textContent =
+    s.dashHeading;
+
+  document.getElementById("dashSub").textContent =
+    s.dashSub;
+
+  document.getElementById("thPatient").textContent =
+    s.thPatient;
+
+  document.getElementById("thUpcoming").textContent =
+    s.thUpcoming;
+
+  document.getElementById("thMeds").textContent =
+    s.thMeds;
+
+  document.getElementById("thStatus").textContent =
+    s.thStatus;
+
+  document.getElementById("editProfileBtn").textContent =
+    s.editProfileBtn;
+
+  document.getElementById("footerText").textContent =
+    s.footerText;
+
+  document.getElementById("langSelect").value =
+    lang;
+
+  updateNetStatus();
+
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+function showTab(name){
+
+  document
+    .querySelectorAll(".panel")
+    .forEach(panel=>{
+      panel.classList.remove("active");
+    });
+
+
+  document
+    .querySelectorAll(".tab-btn")
+    .forEach(button=>{
+      button.classList.remove("active");
+    });
+
+
+  const panel =
+    document.getElementById("panel-" + name);
+
+  if(panel){
+
+    panel.classList.add("active");
+
+  }
+
+
+  const tab =
+    document.querySelector(
+      '.tab-btn[data-tab="' + name + '"]'
+    );
+
+  if(tab){
+
+    tab.classList.add("active");
+
+  }
+
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+function openProfileEditor(){
+
+  const name =
+    prompt(
+      "Patient name:",
+      data.profile?.name || ""
+    );
+
+  if(name === null){
+    return;
+  }
+
+
+  const age =
+    prompt(
+      "Age:",
+      data.profile?.age || ""
+    );
+
+  if(age === null){
+    return;
+  }
+
+
+  const village =
+    prompt(
+      "Village / area:",
+      data.profile?.village || ""
     );
 
 
-    const result = await response.json();
+  if(village === null){
+    return;
+  }
 
 
-    if (result.sosTriggered) {
+  const blood =
+    prompt(
+      "Blood group:",
+      data.profile?.blood || ""
+    );
+
+
+  if(blood === null){
+    return;
+  }
+
+
+  data.profile = {
+
+    name:name.trim() || "Unnamed",
+
+    age:age.trim(),
+
+    village:village.trim(),
+
+    blood:blood.trim()
+
+  };
+
+
+  saveData();
+
+}
+
+
+function renderProfile(){
+
+  const p = data.profile;
+
+  if(!p){
+
+    document.getElementById(
+      "avatarInitial"
+    ).textContent = "?";
+
+    document.getElementById(
+      "profileName"
+    ).textContent = "Set up your profile";
+
+    document.getElementById(
+      "profileMeta"
+    ).textContent =
+      "Tap edit to add your details";
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "avatarInitial"
+  ).textContent =
+    p.name
+      ? p.name.charAt(0).toUpperCase()
+      : "?";
+
+
+  document.getElementById(
+    "profileName"
+  ).textContent =
+    p.name || "Patient";
+
+
+  document.getElementById(
+    "profileMeta"
+  ).textContent =
+    [
+      p.age ? p.age + " yrs" : null,
+      p.village || null
+    ]
+    .filter(Boolean)
+    .join(" · ") ||
+    "No additional details";
+
+}
+
+
+/* =========================================================
+   APPOINTMENTS
+   ========================================================= */
+
+function addAppointment(){
+
+  const doctor =
+    document.getElementById(
+      "apptDoctor"
+    ).value.trim();
+
+  const type =
+    document.getElementById(
+      "apptType"
+    ).value;
+
+  const date =
+    document.getElementById(
+      "apptDate"
+    ).value;
+
+  const time =
+    document.getElementById(
+      "apptTime"
+    ).value;
+
+
+  if(!doctor || !date || !time){
+
+    alert(
+      "Please fill in doctor, date and time."
+    );
+
+    return;
+
+  }
+
+
+  const appointment = {
+
+    id:Date.now(),
+
+    doctor,
+
+    type,
+
+    date,
+
+    time,
+
+    token:
+      "A" +
+      (27 + data.appointments.length),
+
+    ahead:
+      Math.max(
+        2,
+        6 - data.appointments.length
+      )
+
+  };
+
+
+  data.appointments.push(
+    appointment
+  );
+
+
+  data.appointments.sort(
+    (a,b)=>
+      (a.date + a.time)
+      .localeCompare(
+        b.date + b.time
+      )
+  );
+
+
+  document.getElementById(
+    "apptDoctor"
+  ).value = "";
+
+  document.getElementById(
+    "apptDate"
+  ).value = "";
+
+  document.getElementById(
+    "apptTime"
+  ).value = "";
+
+
+  saveData();
+
+}
+
+
+function removeAppointment(id){
+
+  data.appointments =
+    data.appointments.filter(
+      appointment =>
+        appointment.id !== id
+    );
+
+  saveData();
+
+}
+
+
+function renderAppointments(){
+
+  const el =
+    document.getElementById(
+      "apptList"
+    );
+
+
+  if(!data.appointments.length){
+
+    el.innerHTML =
+      '<div class="empty-state">' +
+      '<div class="big">📅</div>' +
+      'No appointments booked yet.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  el.innerHTML =
+    data.appointments.map(
+      (a,i)=>`
+
+      <div class="list-item">
+
+        <div class="list-icon">
+          🩺
+        </div>
+
+        <div class="list-body">
+
+          <div class="list-title">
+            ${escapeHtml(a.doctor)}
+            <span
+              style="
+                font-weight:400;
+                color:var(--ink-soft)
+              "
+            >
+              — ${escapeHtml(a.type)}
+            </span>
+          </div>
+
+          <div class="list-sub">
+            ${escapeHtml(a.date)}
+            at
+            ${escapeHtml(a.time)}
+          </div>
+
+        </div>
+
+        <div class="queue-tag">
+          Token ${escapeHtml(a.token || "A"+(27+i))}
+          · ${a.ahead || 6} ahead
+        </div>
+
+        <button
+          class="btn secondary"
+          onclick="removeAppointment(${a.id})"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   VOICE PRESCRIPTION
+   ========================================================= */
+
+function startVoicePrescription(){
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+  if(!SpeechRecognition){
+
+    alert(
+      "Voice prescription is not supported in this browser.\n\n" +
+      "Please open Sahaay Saathi in Google Chrome."
+    );
+
+    return;
+
+  }
+
+
+  if(isListening){
+
+    return;
+
+  }
+
+
+  voiceRecognition =
+    new SpeechRecognition();
+
+
+  const selectedLanguage =
+    document.getElementById(
+      "langSelect"
+    ).value;
+
+
+  voiceRecognition.lang =
+    selectedLanguage === "hi"
+      ? "hi-IN"
+      : "en-IN";
+
+
+  voiceRecognition.continuous = false;
+
+  voiceRecognition.interimResults = false;
+
+  voiceRecognition.maxAlternatives = 1;
+
+
+  const button =
+    document.getElementById(
+      "voicePrescriptionBtn"
+    );
+
+  const status =
+    document.getElementById(
+      "voiceStatus"
+    );
+
+
+  isListening = true;
+
+
+  if(button){
+
+    button.textContent =
+      "🎙️ Listening...";
+
+    button.disabled = true;
+
+    button.classList.add(
+      "listening"
+    );
+
+  }
+
+
+  if(status){
+
+    status.textContent =
+      selectedLanguage === "hi"
+        ? "🎙️ सुन रहा है... दवा का नाम और खुराक बोलें।"
+        : "🎙️ Listening... Say the medicine name, dose and schedule.";
+
+  }
+
+
+  try{
+
+    voiceRecognition.start();
+
+  }catch(error){
+
+    console.error(error);
+
+    stopVoicePrescription();
+
+    alert(
+      "Could not start the microphone. Please try again."
+    );
+
+  }
+
+
+  voiceRecognition.onresult =
+    function(event){
+
+      const spokenText =
+        event.results[0][0].transcript;
+
+
+      console.log(
+        "Voice prescription:",
+        spokenText
+      );
+
+
+      processVoicePrescription(
+        spokenText
+      );
+
+    };
+
+
+  voiceRecognition.onerror =
+    function(event){
+
+      console.error(
+        "Voice recognition error:",
+        event.error
+      );
+
+
+      stopVoicePrescription();
+
+
+      if(event.error === "not-allowed"){
+
+        alert(
+          "Microphone permission was denied.\n\n" +
+          "Please allow microphone access in Chrome and try again."
+        );
+
+      }
+      else if(event.error === "no-speech"){
+
+        alert(
+          "No speech was detected.\n\n" +
+          "Please tap Voice and speak clearly."
+        );
+
+      }
+      else{
+
+        alert(
+          "Voice input could not be understood.\n\n" +
+          "Please try again."
+        );
+
+      }
+
+    };
+
+
+  voiceRecognition.onend =
+    function(){
+
+      stopVoicePrescription();
+
+    };
+
+}
+
+
+/* =========================================================
+   PROCESS VOICE
+   ========================================================= */
+
+function processVoicePrescription(text){
+
+  if(!text){
+
+    return;
+
+  }
+
+
+  let medicine = text.trim();
+
+  let dose = "";
+
+  let frequency = "";
+
+  let instructions = "";
+
+
+  /* DOSE */
+
+  const doseMatch =
+    medicine.match(
+      /(\d+(?:\.\d+)?\s*(?:mg|g|mcg|ml|tablet|tablets|capsule|capsules|गोली|गोलियां))/i
+    );
+
+
+  if(doseMatch){
+
+    dose =
+      doseMatch[1];
+
+    medicine =
+      medicine
+        .replace(
+          doseMatch[0],
+          ""
+        )
+        .trim();
+
+  }
+
+
+  /* FREQUENCY */
+
+  if(
+    /three times|thrice daily|three times a day|दिन में तीन बार|तीन बार/i
+      .test(text)
+  ){
+
+    frequency =
+      "Thrice daily";
+
+  }
+
+  else if(
+    /twice daily|two times|two times a day|twice a day|दिन में दो बार|दो बार/i
+      .test(text)
+  ){
+
+    frequency =
+      "Twice daily";
+
+  }
+
+  else if(
+    /once daily|once a day|one time a day|दिन में एक बार|एक बार/i
+      .test(text)
+  ){
+
+    frequency =
+      "Once daily";
+
+  }
+
+  else if(
+    /as needed|when needed|जरूरत के अनुसार/i
+      .test(text)
+  ){
+
+    frequency =
+      "As needed";
+
+  }
+
+
+  /* INSTRUCTIONS */
+
+  if(
+    /after food|after meal|after eating|खाने के बाद/i
+      .test(text)
+  ){
+
+    instructions =
+      "After food";
+
+  }
+
+  else if(
+    /before food|before meal|before eating|खाने से पहले/i
+      .test(text)
+  ){
+
+    instructions =
+      "Before food";
+
+  }
+
+
+  /* CLEAN MEDICINE NAME */
+
+  medicine =
+    medicine
+      .replace(
+        /three times a day/ig,
+        ""
+      )
+      .replace(
+        /two times a day/ig,
+        ""
+      )
+      .replace(
+        /once a day/ig,
+        ""
+      )
+      .replace(
+        /thrice daily/ig,
+        ""
+      )
+      .replace(
+        /twice daily/ig,
+        ""
+      )
+      .replace(
+        /once daily/ig,
+        ""
+      )
+      .replace(
+        /as needed/ig,
+        ""
+      )
+      .replace(
+        /when needed/ig,
+        ""
+      )
+      .replace(
+        /after food/ig,
+        ""
+      )
+      .replace(
+        /after meal/ig,
+        ""
+      )
+      .replace(
+        /after eating/ig,
+        ""
+      )
+      .replace(
+        /before food/ig,
+        ""
+      )
+      .replace(
+        /before meal/ig,
+        ""
+      )
+      .replace(
+        /before eating/ig,
+        ""
+      )
+      .replace(
+        /दिन में तीन बार/g,
+        ""
+      )
+      .replace(
+        /दिन में दो बार/g,
+        ""
+      )
+      .replace(
+        /दिन में एक बार/g,
+        ""
+      )
+      .replace(
+        /खाने के बाद/g,
+        ""
+      )
+      .replace(
+        /खाने से पहले/g,
+        ""
+      )
+      .trim();
+
+
+  /* FILL FORM */
+
+  document.getElementById(
+    "medName"
+  ).value =
+    medicine;
+
+
+  document.getElementById(
+    "medDose"
+  ).value =
+    dose;
+
+
+  document.getElementById(
+    "medInstructions"
+  ).value =
+    instructions;
+
+
+  if(frequency){
+
+    document.getElementById(
+      "medFreq"
+    ).value =
+      frequency;
+
+  }
+
+
+  const status =
+    document.getElementById(
+      "voiceStatus"
+    );
+
+
+  if(status){
+
+    status.textContent =
+      "✓ Voice captured. Please check the details before adding the medicine.";
+
+  }
+
+
+  stopVoicePrescription();
+
+
+  alert(
+    "Voice prescription captured.\n\n" +
+    "Medicine: " +
+    medicine +
+    "\n" +
+    "Dose: " +
+    (dose || "Not detected") +
+    "\n" +
+    "Frequency: " +
+    (frequency || "Not detected") +
+    "\n" +
+    "Instructions: " +
+    (instructions || "Not detected") +
+    "\n\n" +
+    "Please check the fields and press Add Medicine."
+  );
+
+}
+
+
+/* =========================================================
+   STOP VOICE
+   ========================================================= */
+
+function stopVoicePrescription(){
+
+  isListening = false;
+
+
+  const button =
+    document.getElementById(
+      "voicePrescriptionBtn"
+    );
+
+
+  const status =
+    document.getElementById(
+      "voiceStatus"
+    );
+
+
+  if(button){
+
+    button.textContent =
+      "🎤 Voice";
+
+    button.disabled = false;
+
+    button.classList.remove(
+      "listening"
+    );
+
+  }
+
+
+  if(status){
+
+    if(!status.textContent.includes("✓")){
+
+      status.textContent = "";
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   MEDICINES
+   ========================================================= */
+
+function addMed(){
+
+  const name =
+    document.getElementById(
+      "medName"
+    ).value.trim();
+
+
+  const dose =
+    document.getElementById(
+      "medDose"
+    ).value.trim();
+
+
+  const time =
+    document.getElementById(
+      "medTime"
+    ).value;
+
+
+  const instructions =
+    document.getElementById(
+      "medInstructions"
+    ).value.trim();
+
+
+  const freq =
+    document.getElementById(
+      "medFreq"
+    ).value;
+
+
+  if(!name || !time){
+
+    alert(
+      "Please fill in medicine name and time."
+    );
+
+    return;
+
+  }
+
+
+  const medicine = {
+
+    id:Date.now(),
+
+    name:name,
+
+    dose:dose,
+
+    instructions:instructions,
+
+    time:time,
+
+    freq:freq,
+
+    taken:false,
+
+    addedAt:
+      new Date()
+        .toISOString()
+
+  };
+
+
+  data.meds.push(
+    medicine
+  );
+
+
+  /*
+    IMPORTANT:
+    Also create a prescription
+    record so it appears in
+    HealthVault timeline.
+  */
+
+  data.records =
+    data.records || [];
+
+
+  data.records.unshift({
+
+    id:Date.now()+1,
+
+    date:
+      new Date()
+        .toISOString()
+        .slice(0,10),
+
+    type:"Prescription",
+
+    title:
+      name +
+      (dose ? " — " + dose : ""),
+
+    provider:
+      "Saved in MedCare",
+
+    medicineId:
+      medicine.id
+
+  });
+
+
+  /* CLEAR FORM */
+
+  document.getElementById(
+    "medName"
+  ).value = "";
+
+  document.getElementById(
+    "medDose"
+  ).value = "";
+
+  document.getElementById(
+    "medInstructions"
+  ).value = "";
+
+  document.getElementById(
+    "medTime"
+  ).value = "";
+
+
+  saveData();
+
+
+  /*
+    Automatically show HealthVault
+    after saving so you can immediately
+    see the medicine there.
+  */
+
+  showTab("healthvault");
+
+
+  alert(
+    name +
+    " has been added to your medicines and HealthVault."
+  );
+
+}
+
+
+function toggleMedTaken(id){
+
+  const medicine =
+    data.meds.find(
+      m => m.id === id
+    );
+
+
+  if(medicine){
+
+    medicine.taken =
+      !medicine.taken;
+
+  }
+
+
+  saveData();
+
+}
+
+
+function removeMed(id){
+
+  const medicine =
+    data.meds.find(
+      m => m.id === id
+    );
+
+
+  data.meds =
+    data.meds.filter(
+      m => m.id !== id
+    );
+
+
+  /*
+    Remove the automatically
+    generated prescription record
+    for this medicine.
+  */
+
+  if(medicine){
+
+    data.records =
+      (data.records || [])
+      .filter(
+        r =>
+          r.medicineId !== id
+      );
+
+  }
+
+
+  saveData();
+
+}
+
+
+function renderMeds(){
+
+  const el =
+    document.getElementById(
+      "medList"
+    );
+
+
+  if(!data.meds.length){
+
+    el.innerHTML =
+      '<div class="empty-state">' +
+      '<div class="big">💊</div>' +
+      'No medicines added yet.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  el.innerHTML =
+    data.meds.map(
+      m => `
+
+      <div class="list-item">
+
+        <div class="list-icon">
+          💊
+        </div>
+
+        <div class="list-body">
+
+          <div class="list-title">
+
+            ${escapeHtml(m.name)}
+
+            ${
+              m.dose
+                ? `
+                  <span
+                    style="
+                      font-weight:400;
+                      color:var(--ink-soft)
+                    "
+                  >
+                    — ${escapeHtml(m.dose)}
+                  </span>
+                `
+                : ""
+            }
+
+          </div>
+
+          <div class="list-sub">
+
+            ${escapeHtml(m.freq || "Schedule not specified")}
+            ·
+            ${escapeHtml(m.time || "Time not specified")}
+
+            ${
+              m.instructions
+                ? " · " + escapeHtml(m.instructions)
+                : ""
+            }
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="queue-tag ${
+            m.taken
+              ? "taken-tag"
+              : "due-tag"
+          }"
+        >
+          ${
+            m.taken
+              ? "Taken today"
+              : "Due"
+          }
+        </div>
+
+
+        <button
+          class="btn ok"
+          style="
+            padding:6px 12px;
+            font-size:12px;
+          "
+          onclick="toggleMedTaken(${m.id})"
+        >
+          ${
+            m.taken
+              ? "Undo"
+              : "Mark taken"
+          }
+        </button>
+
+
+        <button
+          class="btn secondary"
+          onclick="removeMed(${m.id})"
+        >
+          Remove
+        </button>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   HEALTHVAULT
+   ========================================================= */
+
+function addDemoRecord(){
+
+  const title =
+    prompt(
+      "Record title:",
+      "New consultation"
+    );
+
+
+  if(title === null){
+
+    return;
+
+  }
+
+
+  const provider =
+    prompt(
+      "Provider / note:",
+      "Community Health Centre"
+    );
+
+
+  if(provider === null){
+
+    return;
+
+  }
+
+
+  data.records =
+    data.records || [];
+
+
+  data.records.unshift({
+
+    id:Date.now(),
+
+    date:
+      new Date()
+        .toISOString()
+        .slice(0,10),
+
+    type:"Consultation",
+
+    title:
+      title.trim() ||
+      "Consultation",
+
+    provider:
+      provider.trim() ||
+      "Community Health Centre"
+
+  });
+
+
+  saveData();
+
+}
+
+
+function renderHealthVault(){
+
+  const p =
+    data.profile || {};
+
+
+  /* PATIENT */
+
+  const patientName =
+    document.getElementById(
+      "vaultPatientName"
+    );
+
+
+  if(patientName){
+
+    patientName.textContent =
+      p.name || "Patient";
+
+  }
+
+
+  const patientMeta =
+    document.getElementById(
+      "vaultPatientMeta"
+    );
+
+
+  if(patientMeta){
+
+    patientMeta.textContent =
+      [
+        p.age
+          ? p.age + " yrs"
+          : null,
+
+        p.village || null
+
+      ]
+      .filter(Boolean)
+      .join(" · ") ||
+      "No profile details";
+
+  }
+
+
+  const blood =
+    document.getElementById(
+      "vaultBlood"
+    );
+
+
+  if(blood){
+
+    blood.textContent =
+      p.blood ||
+      "Not specified";
+
+  }
+
+
+  /* SUMMARY */
+
+  const summaryPatient =
+    document.getElementById(
+      "vaultSummaryPatient"
+    );
+
+
+  if(summaryPatient){
+
+    summaryPatient.textContent =
+      p.name ||
+      "Patient";
+
+  }
+
+
+  const summaryMeds =
+    document.getElementById(
+      "vaultSummaryMeds"
+    );
+
+
+  if(summaryMeds){
+
+    summaryMeds.textContent =
+      (data.meds || []).length;
+
+  }
+
+
+  const summaryRecords =
+    document.getElementById(
+      "vaultSummaryRecords"
+    );
+
+
+  if(summaryRecords){
+
+    summaryRecords.textContent =
+      (data.records || []).length;
+
+  }
+
+
+  /* MEDICINE COUNT */
+
+  const medCount =
+    document.getElementById(
+      "vaultMedCount"
+    );
+
+
+  if(medCount){
+
+    medCount.textContent =
+      (data.meds || []).length +
+      " active medicine(s)";
+
+  }
+
+
+  /* MEDICINE DETAILS */
+
+  const medDetails =
+    document.getElementById(
+      "vaultMedDetails"
+    );
+
+
+  if(medDetails){
+
+    const meds =
+      data.meds || [];
+
+
+    if(!meds.length){
+
+      medDetails.innerHTML =
+        '<div class="empty-state">' +
+        '<div class="big">💊</div>' +
+        'No active medicines.' +
+        '</div>';
+
+    }
+
+    else{
+
+      medDetails.innerHTML =
+        meds.map(
+          m => `
+
+          <div class="list-item">
+
+            <div class="list-icon">
+              💊
+            </div>
+
+            <div class="list-body">
+
+              <div class="list-title">
+
+                ${escapeHtml(m.name)}
+
+                ${
+                  m.dose
+                    ? " — " +
+                      escapeHtml(m.dose)
+                    : ""
+                }
+
+              </div>
+
+              <div class="list-sub">
+
+                ${
+                  escapeHtml(
+                    m.freq ||
+                    "Schedule not specified"
+                  )
+                }
+
+                ·
+
+                ${
+                  escapeHtml(
+                    m.time ||
+                    "Time not specified"
+                  )
+                }
+
+                ${
+                  m.instructions
+                    ? " · " +
+                      escapeHtml(
+                        m.instructions
+                      )
+                    : ""
+                }
+
+              </div>
+
+            </div>
+
+            <span class="queue-tag">
+              Active
+            </span>
+
+          </div>
+
+          `
+        ).join("");
+
+    }
+
+  }
+
+
+  /* TIMELINE */
+
+  const timeline =
+    document.getElementById(
+      "medicalTimeline"
+    );
+
+
+  if(!timeline){
+
+    return;
+
+  }
+
+
+  const records =
+    data.records || [];
+
+
+  if(!records.length){
+
+    timeline.innerHTML =
+      '<div class="empty-state">' +
+      '<div class="big">🩺</div>' +
+      'No medical records yet.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  const sortedRecords =
+    records
+      .slice()
+      .sort(
+        (a,b)=>
+          (b.date || "")
+          .localeCompare(
+            a.date || ""
+          )
+      );
+
+
+  timeline.innerHTML =
+    sortedRecords.map(
+      r => {
+
+        let icon = "🩺";
+
+
+        if(r.type === "Blood Report"){
+
+          icon = "🧪";
+
+        }
+
+        else if(
+          r.type === "Prescription"
+        ){
+
+          icon = "💊";
+
+        }
+
+        else if(
+          r.type === "Vaccination"
+        ){
+
+          icon = "💉";
+
+        }
+
+
+        return `
+
+        <div class="list-item">
+
+          <div class="list-icon">
+            ${icon}
+          </div>
+
+          <div class="list-body">
+
+            <div class="list-title">
+
+              ${escapeHtml(r.title)}
+
+              <span
+                style="
+                  font-weight:400;
+                  color:var(--ink-soft)
+                "
+              >
+                — ${escapeHtml(r.type)}
+              </span>
+
+            </div>
+
+            <div class="list-sub">
+
+              ${escapeHtml(r.date || "—")}
+              ·
+              ${escapeHtml(
+                r.provider ||
+                "Healthcare centre"
+              )}
+
+            </div>
+
+          </div>
+
+          <span class="queue-tag">
+            Saved
+          </span>
+
+        </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
+   ASSISTANCE
+   ========================================================= */
+
+function requestAssistance(){
+
+  data.assistance = {
+
+    id:Date.now(),
+
+    status:"received",
+
+    created:
+      new Date()
+        .toISOString()
+
+  };
+
+
+  saveData();
+
+
+  alert(
+    "Assistance request sent to the community healthcare worker."
+  );
+
+}
+
+
+function renderAssistance(){
+
+  const el =
+    document.getElementById(
+      "assistanceStatus"
+    );
+
+
+  if(!el){
+
+    return;
+
+  }
+
+
+  if(!data.assistance){
+
+    el.innerHTML = "";
+
+    return;
+
+  }
+
+
+  el.innerHTML =
+    '<div style="' +
+    'margin-top:10px;' +
+    'padding:10px 12px;' +
+    'background:#FBF3E4;' +
+    'border-radius:10px;' +
+    'font-size:12px;' +
+    '">' +
+    '<strong>✓ Request received</strong>' +
+    ' · Worker notification pending · ' +
+    'No diagnosis is provided by Sahaay Saathi.' +
+    '</div>';
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+function renderDashboard(){
+
+  const body =
+    document.getElementById(
+      "dashBody"
+    );
+
+
+  if(!body){
+
+    return;
+
+  }
+
+
+  const p =
+    data.profile;
+
+
+  if(!p){
+
+    body.innerHTML =
+      '<tr>' +
+      '<td colspan="4" ' +
+      'style="text-align:center;color:var(--ink-soft);padding:20px;">' +
+      'No patient profile set up yet.' +
+      '</td>' +
+      '</tr>';
+
+    return;
+
+  }
+
+
+  const nextAppointment =
+    data.appointments[0];
+
+
+  const activeMeds =
+    data.meds.length;
+
+
+  const status =
+    data.meds.some(
+      m => !m.taken
+    )
+      ? "Action needed"
+      : "Up to date";
+
+
+  const dotColor =
+    status === "Action needed"
+      ? "var(--clay)"
+      : "var(--ok)";
+
+
+  body.innerHTML = `
+
+    <tr>
+
+      <td>
+
+        <strong>
+          ${escapeHtml(p.name)}
+        </strong>
+
+        <br>
+
+        <span
+          style="
+            color:var(--ink-soft);
+            font-size:12px;
+          "
+        >
+          ${
+            p.age
+              ? escapeHtml(p.age) +
+                " yrs · "
+              : ""
+          }
+
+          ${
+            escapeHtml(
+              p.village || ""
+            )
+          }
+
+        </span>
+
+      </td>
+
+
+      <td>
+
+        ${
+          nextAppointment
+            ? escapeHtml(
+                nextAppointment.date +
+                " " +
+                nextAppointment.time
+              )
+            : "—"
+        }
+
+      </td>
+
+
+      <td>
+        ${activeMeds}
+      </td>
+
+
+      <td>
+
+        <span
+          class="risk-dot"
+          style="
+            background:${dotColor}
+          "
+        ></span>
+
+        ${status}
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* =========================================================
+   OFFLINE
+   ========================================================= */
+
+function updateNetStatus(){
+
+  const online =
+    navigator.onLine &&
+    !window.forcedOffline;
+
+
+  const dot =
+    document.getElementById(
+      "netDot"
+    );
+
+
+  const label =
+    document.getElementById(
+      "netLabel"
+    );
+
+
+  const s =
+    strings[
+      currentLang || "en"
+    ];
+
+
+  if(dot){
+
+    dot.classList.toggle(
+      "off",
+      !online
+    );
+
+  }
+
+
+  if(label){
+
+    label.textContent =
+      online
+        ? s.online
+        : s.offline;
+
+  }
+
+
+  updateOfflineInfo();
+
+}
+
+
+function updateOfflineInfo(){
+
+  const online =
+    navigator.onLine &&
+    !window.forcedOffline;
+
+
+  const connection =
+    document.getElementById(
+      "vaultConnection"
+    );
+
+
+  if(connection){
+
+    connection.textContent =
+      online
+        ? "Connected — data is also saved locally."
+        : "Offline — your saved health data remains available.";
+
+  }
+
+
+  const localData =
+    document.getElementById(
+      "vaultLocalData"
+    );
+
+
+  if(localData){
+
+    localData.textContent =
+      data.appointments.length +
+      " appointment(s), " +
+      data.meds.length +
+      " medicine(s), " +
+      (data.records || []).length +
+      " health record(s) saved on this device.";
+
+  }
+
+}
+
+
+window.addEventListener(
+  "online",
+  updateNetStatus
+);
+
+
+window.addEventListener(
+  "offline",
+  updateNetStatus
+);
+
+
+/* =========================================================
+   SOS
+   ========================================================= */
+
+async function openSahaaySOS(){
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to request emergency assistance?"
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  const pin =
+    prompt(
+      "Enter your SOS authorization PIN:"
+    );
+
+
+  if(!pin){
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/sos",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            pin:pin
+          })
+
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(result.sosTriggered){
 
       alert(
         "Emergency assistance request recorded."
       );
 
-    } else {
+    }
+    else{
 
-      alert(result.message);
+      alert(
+        result.message ||
+        "SOS request could not be completed."
+      );
 
     }
 
-  } catch (error) {
+  }
+
+  catch(error){
 
     console.error(
       "SOS error:",
       error
     );
+
 
     alert(
       "Unable to connect to the SOS service."
@@ -926,6 +3775,115 @@ async function openSahaaySOS() {
 
 }
 
+
+/* =========================================================
+   SECURITY / DISPLAY HELPER
+   ========================================================= */
+
+function escapeHtml(value){
+
+  if(value === null ||
+     value === undefined){
+
+    return "";
+
+  }
+
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+function init(){
+
+  if(!data.profile){
+
+    data.profile = {
+
+      name:"Ramesh Kumar",
+
+      age:"42",
+
+      village:"Rampur",
+
+      blood:"B+"
+
+    };
+
+  }
+
+
+  data.appointments =
+    data.appointments || [];
+
+
+  data.meds =
+    data.meds || [];
+
+
+  data.records =
+    data.records || [];
+
+
+  data.assistance =
+    data.assistance || null;
+
+
+  setLanguage(
+    currentLang
+  );
+
+
+  renderProfile();
+
+  renderAppointments();
+
+  renderMeds();
+
+  renderHealthVault();
+
+  renderDashboard();
+
+  renderAssistance();
+
+  updateNetStatus();
+
+}
+
+
+init();
+
 </script>
+
 </body>
 </html>
